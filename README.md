@@ -2,7 +2,7 @@
 
 This website provide examples to support our paper "Comparing Model-Metamodel and Transformation-Metamodel Co-evolution, *Louis M. Rose, Anne Etien, David Mendez, Dimitrios S. Kolovos, Richard F. Paige and Fiona A.C. Polack*, in Proc. Workshop on Model Evolution 2010, co-located with MoDELS 2010, Oslo, Norway."
 
-The paper discusses model-metamodel co-evolution and transformation-metamodel co-evolution. This website gives an example of each type of co-evolution, and re-uses the example of an evolution of a Petri net metamodel from [x][cicchetti08automating]. 
+The paper discusses model-metamodel co-evolution and transformation-metamodel co-evolution. This website gives an example of each type of co-evolution, and re-uses the example of an evolution of a Petri net metamodel from [x][cicchetti]. 
 
 ## Metamodel Evolution
 
@@ -107,7 +107,7 @@ In general, the following transformation migration strategy is envisaged for tra
 	
 ## References
 
-[1]: http://dx.doi.org/10.1109/EDOC.2008.44  "A. Cicchetti, D. DiRuscio, R. Eramo, and A.Pierantonio. Automating co-evolution in MDE. In Proc. EDOC, 2008."
+[cicchetti]: http://dx.doi.org/10.1109/EDOC.2008.44  "A. Cicchetti, D. DiRuscio, R. Eramo, and A.Pierantonio. Automating co-evolution in MDE. In Proc. EDOC, 2008."
 [2]: http://dx.doi.org/10.1007/978-3-642-02674-4_4  "K. Garces, F. Jouault, P. Cointe, and J. Bezivin. Managing model adaptation by precise detection of metamodel changes. In Proc. ECMDA-FA, 2009."
 [3]: http://dx.doi.org/10.1007/978-3-642-13688-7_13  " L.M. Rose, D.S. Kolovos, R.F. Paige, and F.A.C. Polack. Model migration with Epsilon Flock. In Proc. ICMT, 2010."
 [4]: http://dx.doi.org/10.1007/978-3-540-73589-2_28  "G. Wachsmuth, Metamodel Adaptation and Model Co-adaptation. In Proc. ECOOP, 2007"
