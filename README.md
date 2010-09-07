@@ -24,86 +24,84 @@ Various approaches to formulating migration strategies have been proposed, and a
 ## Model Migration
 The following strategy is envisaged for model migration:
 
-	* For every instance, t, of Transition}: 
-	** For every Place}, s, referenced by the src} feature of t: 
-	*** Create a new instance, arc, of PTArc}. 
-	*** Set s as the src} of arc. 
-	*** Set t as the dst} of arc. 
-	*** Add arc to the arcs} reference of the Net} referenced by t.
-	
-	** For every Place}, d, referenced by the dst} feature of t: 
-	*** Create a new instance, arc, of TPArc}. 
-	*** Set t as the src} of arc. 
-	*** Set d as the dst} of arc. 
-	*** Add arc to the arcs} reference of the Net} referenced by t.
-	
-	* And nothing else changes.
+* For every instance, t, of Transition}: 
+** For every Place}, s, referenced by the src} feature of t: 
+*** Create a new instance, arc, of PTArc}. 
+*** Set s as the src} of arc. 
+*** Set t as the dst} of arc. 
+*** Add arc to the arcs} reference of the Net} referenced by t.
+
+** For every Place}, d, referenced by the dst} feature of t: 
+*** Create a new instance, arc, of TPArc}. 
+*** Set t as the src} of arc. 
+*** Set d as the dst} of arc. 
+*** Add arc to the arcs} reference of the Net} referenced by t.
+
+* And nothing else changes.
 
 
 ## Transformation Migration
-The listing below shows an exemplar transformation that consumes a graph (an instance of a metamodel comprising graph, node and edge metaclasses), and produces a Petri net.
+The listing below shows an exemplar transformation, written in QVTO, that consumes a graph (an instance of a metamodel comprising graph, node and edge metaclasses), and produces a Petri net.
 
-    mapping graph::Graph::toNet(): PN::Net {
-    	places+=self.nodes->map toPlace();
-    	transitions+=self.edges->map toTransition();	
-    }
+    1.  mapping graph::Graph::toNet(): PN::Net {
+    2.  	places+=self.nodes->map toPlace();
+    3.  	transitions+=self.edges->map toTransition();	
+    4.  }
+    5. 
+    6.  mapping graph::Node::toPlace(): PN::Place {
+    7.  	name:=self.name;
+    8.  	src:=self.is_source->map toTransition();
+    9.  	dest:=self.is_target->map toTransition();
+    10. }
+    11. 
+    12. mapping graph::Edge::toTransition(): PN::Transition {
+    13.     name:=self.name;
+    14. }
 
-    mapping graph::Node::toPlace(): PN::Place{
-    	name:=self.name;
-    	src:=self.is_source->map toTransition();
-    	dest:=self.is_target->map toTransition();
-    }
+Following the Petri net metamodel evolution described above, migration of the transformation results in the listing below. Note that lines 8 and 9 of the original transformation, which populate the src and dst features of Transition, have been migrated. The equivalent code in the evolved transformation, on lines 10 and 11, now populates the src and dst features with subclasses of the Arc metaclass, which was introduced in the evolved metamodel (shown above). Note also that in and out are QVTO keywords, and features named in and out must be prefixed with an underscore (\_), as shown on lines 10 and 11.
 
-    mapping graph::Edge::toTransition(): 
-    PN::Transition{
-    	name:=self.name;
-    }
-
-Following the Petri net metamodel evolution described above, migration of the transformation results in the listing below. Note that lines 8 and 9 of the original transformation, which populate the src} and dst} features of Transition}, have been migrated. The equivalent code in the evolved transformation, on lines 10 and 11, now populates the src} and dst} features with subclasses of the Arc} metaclass, which was introduced in the evolved metamodel (Figure~\ref{fig:evolved_mm}).
-
-    mapping graph::Graph::toNet(): EPN::Net {
-    	places+=self.nodes->map toPlace();
-    	transitions+=self.edges->map toTransition();
-    	arcs+=self.edges->map toPTArc();
-    	arcs+=self.edges->map toTPArc();
-    }
-
-    mapping graph::Node::toPlace(): EPN::Place{
-    	name:=self.name;
-    	_in:=self.is_source->map toTPArc();
-    	_out:=self.is_target->map toPTArc();
-    }
-
-    mapping graph::Edge::toTransition():
-    EPN::Transition{
-    	name:=self.name;
-    }
-
-    mapping graph::Edge::toTPArc(): EPN::TPArc{
-            src:=self->map toTransition();
-    }
-
-    mapping graph::Edge::toPTArc(): EPN::PTArc{
-            dest:=self->map toTransition();
-    }
+    1.  mapping graph::Graph::toNet(): EPN::Net {
+    2.      places+=self.nodes->map toPlace();
+    3.      transitions+=self.edges->map toTransition();
+    4.      arcs+=self.edges->map toPTArc();
+    5.      arcs+=self.edges->map toTPArc();
+    6.  }
+    7.
+    8.  mapping graph::Node::toPlace(): EPN::Place {
+    9.      name:=self.name;
+    10.	    _in:=self.is_source->map toTPArc();
+    11.	    _out:=self.is_target->map toPTArc();
+    12. }
+    13.
+    14. mapping graph::Edge::toTransition(): EPN::Transition {
+    15.     name:=self.name;
+    16. }
+    17. 
+    18. mapping graph::Edge::toTPArc(): EPN::TPArc{
+    19.     src:=self->map toTransition();
+    20. }
+    21.
+    22. mapping graph::Edge::toPTArc(): EPN::PTArc{
+    23.     dest:=self->map toTransition();
+    24. }
 
 
 In general, the following transformation migration strategy is envisaged for transformations that use the Petri nets metamodel as a target:
 
-	* In rules creating a Place}: 
-	** Replace every statement that refers to src} with a statement that refers to \_in}\footnote{in and out are QVTO keywords. Features named in and out must be prefixed with an underscore (\_).}, and invokes a TPArc} rule rather than a Transition} rule.
-	** Replace every statement that refers to dst} with a statement that refers to \_out}, and invokes a PTArc} rule rather than a Transition} rule.
-	
-	* In rules creating a Net}: 
-	** Add statements to populate the arcs} feature.
-	
-	* Add a rule creating TPArc}s, which:
-	** Populates the src} feature. 
-	
-	* Add a rule creating PTArc}s, which:
-	** Populates the dst} feature.
+* In rules creating a Place: 
+** Replace every statement that refers to src with a statement that refers to \_in, and invokes a TPArc rule rather than a Transition rule.
+** Replace every statement that refers to dst} with a statement that refers to \_out, and invokes a PTArc rule rather than a Transition rule.
 
-	* And nothing else changes.
+* In rules creating a Net: 
+** Add statements to populate the arcs feature.
+
+* Add a rule creating TPArcs, which:
+** Populates the src feature. 
+
+* Add a rule creating PTArcs, which:
+** Populates the dst feature.
+
+* And nothing else changes.
 	
 
 [cicchetti]: http://dx.doi.org/10.1109/EDOC.2008.44  "A. Cicchetti, D. DiRuscio, R. Eramo, and A.Pierantonio. Automating co-evolution in MDE. In Proc. EDOC, 2008."
