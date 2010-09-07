@@ -8,13 +8,13 @@ The paper discusses model-metamodel co-evolution and transformation-metamodel co
 
 Suppose that we have the following metamodel:
 
-![Original Petri nets metamodel](before.pdf)
+![Original Petri nets metamodel](blob/master/before.pdf)
 
 Here a Petri Net comprises Places and Transitions. A Place has any number of source or destination Transitions. Similarly, a Transition has at least one source and destination Place. 
 
 The metamodel is to be evolved so as to support weighted connections between Places and Transitions and between Transitions and Places. The evolved metamodel is shown below. Places are connected to Transitions via instances of PTArc. Likewise, Transitions are connected to Places via TPArc. Both PTArc and TPArc inherit from Arc, and therefore can be used to specify a weight.
 
-![Evolved Petri nets metamodel](after.pdf)
+![Evolved Petri nets metamodel](blob/master/after.pdf)
 
 The metamodel evolution might affect the conformance of Petri net models and the domain conformance of transformations that use the Petri nets metamodel. Exemplar model and transformation migration strategies for the Petri net metamodel evolution are discussed below.
 
@@ -108,5 +108,5 @@ In general, the following transformation migration strategy is envisaged for tra
 
 [cicchetti]: http://dx.doi.org/10.1109/EDOC.2008.44  "A. Cicchetti, D. DiRuscio, R. Eramo, and A.Pierantonio. Automating co-evolution in MDE. In Proc. EDOC, 2008."
 [garces]: http://dx.doi.org/10.1007/978-3-642-02674-4_4  "K. Garces, F. Jouault, P. Cointe, and J. Bezivin. Managing model adaptation by precise detection of metamodel changes. In Proc. ECMDA-FA, 2009."
-[rose]: http://dx.doi.org/10.1007/978-3-642-13688-7_13  " L.M. Rose, D.S. Kolovos, R.F. Paige, and F.A.C. Polack. Model migration with Epsilon Flock. In Proc. ICMT, 2010."
+[rose]: http://dx.doi.org/10.1007/978-3-642-13688-7_13  "L.M. Rose, D.S. Kolovos, R.F. Paige, and F.A.C. Polack. Model migration with Epsilon Flock. In Proc. ICMT, 2010."
 [wachsmuth]: http://dx.doi.org/10.1007/978-3-540-73589-2_28  "G. Wachsmuth, Metamodel Adaptation and Model Co-adaptation. In Proc. ECOOP, 2007"
