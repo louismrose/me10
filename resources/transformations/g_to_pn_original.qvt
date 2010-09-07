@@ -1,0 +1,15 @@
+mapping graph::Graph::toNet(): PN::Net {
+	places+=self.nodes->map toPlace();
+	transitions+=self.edges->map toTransition();	
+}
+
+mapping graph::Node::toPlace(): PN::Place{
+	name:=self.name;
+	src:=self.is_source->map toTransition();
+	dest:=self.is_target->map toTransition();
+}
+
+mapping graph::Edge::toTransition(): 
+PN::Transition{
+	name:=self.name;
+}

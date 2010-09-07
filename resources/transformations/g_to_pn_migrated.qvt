@@ -1,0 +1,25 @@
+mapping graph::Graph::toNet(): EPN::Net {
+	places+=self.nodes->map toPlace();
+	transitions+=self.edges->map toTransition();
+	arcs+=self.edges->map toPTArc();
+	arcs+=self.edges->map toTPArc();
+}
+
+mapping graph::Node::toPlace(): EPN::Place{
+	name:=self.name;
+	_in:=self.is_source->map toTPArc();
+	_out:=self.is_target->map toPTArc();
+}
+
+mapping graph::Edge::toTransition():
+EPN::Transition{
+	name:=self.name;
+}
+
+mapping graph::Edge::toTPArc(): EPN::TPArc{
+        src:=self->map toTransition();
+}
+
+mapping graph::Edge::toPTArc(): EPN::PTArc{
+        dest:=self->map toTransition();
+}
