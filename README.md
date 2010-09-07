@@ -24,20 +24,18 @@ Various approaches to formulating migration strategies have been proposed, and a
 ## Model Migration
 The following strategy is envisaged for model migration:
 
-* For every instance, t, of Transition}: 
-** For every Place}, s, referenced by the src} feature of t: 
-*** Create a new instance, arc, of PTArc}. 
-*** Set s as the src} of arc. 
-*** Set t as the dst} of arc. 
-*** Add arc to the arcs} reference of the Net} referenced by t.
-
-** For every Place}, d, referenced by the dst} feature of t: 
-*** Create a new instance, arc, of TPArc}. 
-*** Set t as the src} of arc. 
-*** Set d as the dst} of arc. 
-*** Add arc to the arcs} reference of the Net} referenced by t.
-
-* And nothing else changes.
+* For every instance, t, of Transition: 
+  * For every Place, s, referenced by the src feature of t: 
+      * Create a new instance, arc, of PTArc. 
+      * Set s as the src of arc. 
+      * Set t as the dst of arc. 
+      * Add arc to the arcs reference of the Net referenced by t.
+  * For every Place, d, referenced by the dst feature of t: 
+      * Create a new instance, arc, of TPArc. 
+      * Set t as the src of arc. 
+      * Set d as the dst of arc. 
+      * Add arc to the arcs reference of the Net referenced by t.
+  * And nothing else changes.
 
 
 ## Transformation Migration
@@ -89,18 +87,14 @@ Following the Petri net metamodel evolution described above, migration of the tr
 In general, the following transformation migration strategy is envisaged for transformations that use the Petri nets metamodel as a target:
 
 * In rules creating a Place: 
-** Replace every statement that refers to src with a statement that refers to \_in, and invokes a TPArc rule rather than a Transition rule.
-** Replace every statement that refers to dst} with a statement that refers to \_out, and invokes a PTArc rule rather than a Transition rule.
-
+  * Replace every statement that refers to src with a statement that refers to \_in, and invokes a TPArc rule rather than a Transition rule.
+  * Replace every statement that refers to dst} with a statement that refers to \_out, and invokes a PTArc rule rather than a Transition rule.
 * In rules creating a Net: 
-** Add statements to populate the arcs feature.
-
+  * Add statements to populate the arcs feature.
 * Add a rule creating TPArcs, which:
-** Populates the src feature. 
-
+  * Populates the src feature. 
 * Add a rule creating PTArcs, which:
-** Populates the dst feature.
-
+  * Populates the dst feature.
 * And nothing else changes.
 	
 
