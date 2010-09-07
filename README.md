@@ -2,7 +2,7 @@
 
 This website provide examples to support our paper "Comparing Model-Metamodel and Transformation-Metamodel Co-evolution, *Louis M. Rose, Anne Etien, David Mendez, Dimitrios S. Kolovos, Richard F. Paige and Fiona A.C. Polack*, in Proc. Workshop on Model Evolution 2010, co-located with MoDELS 2010, Oslo, Norway."
 
-The paper discusses model-metamodel co-evolution and transformation-metamodel co-evolution. This website gives an example of each type of co-evolution, and re-uses the example of an evolution of a Petri net metamodel from [1][cicchetti08automating]. 
+The paper discusses model-metamodel co-evolution and transformation-metamodel co-evolution. This website gives an example of each type of co-evolution, and re-uses the example of an evolution of a Petri net metamodel from [x][cicchetti08automating]. 
 
 ## Metamodel Evolution
 
