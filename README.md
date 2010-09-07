@@ -4,7 +4,9 @@ This website provide examples to support our paper "Comparing Model-Metamodel an
 
 The paper discusses model-metamodel co-evolution and transformation-metamodel co-evolution. This website gives an example of each type of co-evolution, and re-uses the example of an evolution of a Petri net metamodel from [1][cicchetti], [2][garces], [3][rose] and [4][wachsmuth].
 
-The metamodels, models and transformations are available via the downloads page.
+The metamodels, models and transformations are available as a [zip file](http://github.com/downloads/louismrose/me10/resources.zip), or by checking out this repository using Git:
+
+    git clone http://github.com/louismrose/me10.git
 
 ## Metamodel Evolution
 
