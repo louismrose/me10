@@ -12,13 +12,13 @@ The metamodels, models and transformations are available as a [zip file](http://
 
 Suppose that we have the following metamodel:
 
-![Original Petri nets metamodel](me10/raw/master/images/before.pdf)
+![Original Petri nets metamodel](me10/raw/master/images/before.png)
 
 Here a Petri Net comprises Places and Transitions. A Place has any number of source or destination Transitions. Similarly, a Transition has at least one source and destination Place. 
 
 The metamodel is to be evolved so as to support weighted connections between Places and Transitions and between Transitions and Places. The evolved metamodel is shown below. Places are connected to Transitions via instances of PTArc. Likewise, Transitions are connected to Places via TPArc. Both PTArc and TPArc inherit from Arc, and therefore can be used to specify a weight.
 
-![Evolved Petri nets metamodel](me10/raw/master/images/after.pdf)
+![Evolved Petri nets metamodel](me10/raw/master/images/after.png)
 
 The metamodel evolution might affect the conformance of Petri net models and the domain conformance of transformations that use the Petri nets metamodel. Exemplar model and transformation migration strategies for the Petri net metamodel evolution are discussed below.
 
